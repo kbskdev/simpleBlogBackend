@@ -42,7 +42,7 @@ const postsSchema = new mongoose.Schema({
 })
 
 const Comment = mongoose.model('comment',commentsSchema)
-const Posts = mongoose.model('posts',postsSchema)
+const Posts = mongoose.model('posts',postsSchema,'Posts')
 
 exports.Comment = Comment
 exports.Posts = Posts
