@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 
 const Model = require("./models/commentsModel")
 
-dotenv.config({path:"./config.env"})
+dotenv.config({path:"config.env"})
 
 mongoose.connect(`${process.env.database}`,{useNewUrlParser:true, useUnifiedTopology:true, useCreateIndex:true, useFindAndModify:false}).then(con=>{
     console.log("polaczono")
