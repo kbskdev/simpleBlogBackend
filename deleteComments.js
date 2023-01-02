@@ -12,6 +12,6 @@ mongoose.connect(`${process.env.DATABASE}`,{useNewUrlParser:true, useUnifiedTopo
 const post = process.argv[2]
 const commsNum = process.argv[3]
 
-Model.Posts.findByIdAndUpdate({_id:"638e7fa64baa1421bc9aaeea"},{$set:{comments:[]}}).then(data=>{
+Model.Posts.findByIdAndUpdate({_id:`${post}`},{$set:{comments:[]}}).then(data=>{
     console.log(data)
 })
