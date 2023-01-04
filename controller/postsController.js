@@ -9,7 +9,7 @@ exports.getPost = async(req,res)=>{
         Model.Posts.findById(req.params.id).then(data=>{
             res.status(200).json({
                 status:"succes",
-                data:data
+                data:Array(data)
             })
         }).catch(err=>{
             res.status(500).json({
@@ -19,6 +19,7 @@ exports.getPost = async(req,res)=>{
         })
     }catch (err){console.log("jakis nieoczekiwany blad")}
 }
+
 
 exports.addPost = async(req,res)=>{
     try{
@@ -34,6 +35,28 @@ exports.addPost = async(req,res)=>{
             })
         })
     }catch (err){console.log("jakis nieoczekiwany blad")}
+}
+
+exports.getPostIcon = async(req,res)=>{
+    try{
+        Model.Posts.find().then(data=>{
+                resData = []
+                data.forEach(row=>{
+                    resData.push({_id:row._id,title:row.title,author: row.author,date:row.date,votes:row.votes})
+                })
+
+            res.status(200)
+                .json({
+                    status:"succes",
+                    data:resData
+                })
+        }).catch(err=>{
+            res.status(500).json({
+                status:"fail",
+                err:err
+            })
+        })
+    } catch (err){console.log("blad")}
 }
 
 exports.getAllPosts = async(req,res)=>{

@@ -21,8 +21,9 @@ router.use((req, res, next) => {
     console.log(req.newQueries)
     next()
 })
-
+router.route("/icons/").get(postsController.getPostIcon)
 router.route("/:id").get(postsController.getPost)
-router.route("/").post(postsController.addPost).get(postsController.getAllPosts)
+router.route("/").get(postsController.getAllPosts).post(postsController.addPost)
 router.route("/comments/:id").get(postsController.getComments).post(postsController.addComment)
+
 module.exports = router
