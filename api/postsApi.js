@@ -17,13 +17,15 @@ router.use((req, res, next) => {
 
     req.newQueries = req.query;
     excludedQueries.forEach(el=> delete req.newQueries[el])
-    console.log(req.query)
-    console.log(req.newQueries)
+    //console.log(req.query)
+    //console.log(req.newQueries)
+    console.log(req.body)
     next()
 })
+router.route("/").get(postsController.getAllPosts).post(postsController.addPost)
 router.route("/icons/").get(postsController.getPostIcon)
 router.route("/:id").get(postsController.getPost)
-router.route("/").get(postsController.getAllPosts).post(postsController.addPost)
+router.route("/lazyload/:skipped").get(postsController.getLazyPost)
 router.route("/comments/:id").get(postsController.getComments).post(postsController.addComment)
 
 module.exports = router

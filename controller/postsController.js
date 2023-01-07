@@ -21,6 +21,26 @@ exports.getPost = async(req,res)=>{
 }
 
 
+exports.getLazyPost = async(req,res)=>{
+    try{
+        Model.Posts.find().skip(parseInt(req.params.skipped)).limit(6).then(data=>{
+            resData = []
+            data.forEach(row=>{
+                resData.push({_id:row._id,title:row.title,author: row.author,date:row.date,votes:row.votes})
+            })
+            res.status(200).json({
+                status:"succes",
+                data:resData,
+            })
+        }).catch(err=>{
+            res.status(500).json({
+                status:"fail",
+                err:err
+            })
+        })
+    }catch (err){console.log("jakis nieoczekiwany blad")}
+}
+
 exports.addPost = async(req,res)=>{
     try{
         Model.Posts.create({title:req.body.title,author:req.body.author,text:req.body.text,date:Date()}).then(data=>{
@@ -33,13 +53,14 @@ exports.addPost = async(req,res)=>{
                 status:"fail",
                 err:err
             })
+            console.log("nie udalo sie poniewaz: "+err.msg)
         })
     }catch (err){console.log("jakis nieoczekiwany blad")}
 }
 
 exports.getPostIcon = async(req,res)=>{
     try{
-        Model.Posts.find().then(data=>{
+        Model.Posts.find().limit(10).then(data=>{
                 resData = []
                 data.forEach(row=>{
                     resData.push({_id:row._id,title:row.title,author: row.author,date:row.date,votes:row.votes})
