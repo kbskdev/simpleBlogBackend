@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-const Comment = require("../models/commentsModel")
 const postsController = require('../controller/postsController')
 
 router.param('id',(req,res,next)=>{
